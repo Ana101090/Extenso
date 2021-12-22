@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extenso</title>
+</head>
+<body>
+    <script>
+
+   var numeroInserido = prompt("Digite aqui seu número entre 1 e 1.000.000");
+
+    if (numeroInserido <= 0 || numeroInserido > 1000000 ) {
+         alert("Número Inválido! Tente novamente com um número entre 1 e 1.000.000 ")
+    };
+
+    var unidades = [" ", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove"];
+    var Dezenas = [" ", "Dez", "vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
+    var Centenas = [ " ","Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"];
+    var exce = [" ", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezeseis", "Dezesete", "Dezoito", "Dezenove"];
+   
+    if( numeroInserido >= 1 && numeroInserido <= 9 ){
+        document.write( unidades[numeroInserido])
+    }
+
+
+    </script>
+    
+</body>
+</html>
