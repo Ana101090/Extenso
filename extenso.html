@@ -8,43 +8,61 @@
 </head>
 <body>
     <script>
-
+   
+   //recebe e guarda numero digitado
    var numeroInserido = prompt("Digite aqui seu número entre 1 e 1.000.000");
-
+  
+   //valida numero recebido
     if (numeroInserido <= 0 || numeroInserido > 1000000 ) {
          alert("Número Inválido! Tente novamente com um número entre 1 e 1.000.000 ")
     };
-
+  
+    
+    //verifca a quantidade  de dígitos
     var tamanho = numeroInserido.length
-
+    
+    
     var unidades = [" ", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove"];
-    var Dezenas = [" ", "Dez", "vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
+    var Dezenas = [" ", "Dez", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
     var Centenas = [ " ","Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"];
     var exce = [" ", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezeseis", "Dezesete", "Dezoito", "Dezenove"];
    
+    //Lê e guarda nas variáveis respectivas aos números digitados
     for (let index = 0; index < numeroInserido.length; index++) {
       var primeiro = numeroInserido[0]
       var segundo = numeroInserido[1] 
-      var terceiro = numeroInserido[2]
-
-    }
-
+      
+    
+    };
+   
+    //confere se o número está entre 1 e 9
     if( numeroInserido >= 1 && numeroInserido <= 9 ){
         document.write( unidades[numeroInserido])
+    } else if ( numeroInserido == 10 ){
+      document.write("Dez")
     };
     
-  
+    //confere se o número está entre 11 e 19
     if (numeroInserido >= 11 && numeroInserido <= 19  ){
       document.write(exce[segundo])
     };
 
-    if(numeroInserido >= 21 && numeroInserido <= 99 ){
-      document.write( Dezenas[primeiro] + " e " + unidades[segundo] )
-    }
+   //verifica se é dezena
+    if (numeroInserido >= 20){
+   //compõe dezena simples
+    if (tamanho === 2 &&  segundo == 0 ){
+      document.write(Dezenas[primeiro])
+    //compõe dezena composta
+   } else if (tamanho === 2 && segundo != 0){
+    document.write(Dezenas[primeiro] + " e " + unidades[segundo])
+   }
+  };
+ 
+
   
-  
-     
-  
+ 
+
+   
 
 
     
