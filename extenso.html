@@ -15,26 +15,39 @@
          alert("Número Inválido! Tente novamente com um número entre 1 e 1.000.000 ")
     };
 
+    var tamanho = numeroInserido.length
+
     var unidades = [" ", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove"];
     var Dezenas = [" ", "Dez", "vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
     var Centenas = [ " ","Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"];
     var exce = [" ", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezeseis", "Dezesete", "Dezoito", "Dezenove"];
    
-    if( numeroInserido >= 1 && numeroInserido <= 9 ){
-        document.write( unidades[numeroInserido])
-    } 
-    
-   
     for (let index = 0; index < numeroInserido.length; index++) {
       var primeiro = numeroInserido[0]
       var segundo = numeroInserido[1] 
-    }
-      if( numeroInserido >= 21 && numeroInserido <= 99){
-      document.write (Dezenas[primeiro] + " e " + unidades[segundo])
-    
+      var terceiro = numeroInserido[2]
+
     }
 
-    document.write("teste")
+    if( numeroInserido >= 1 && numeroInserido <= 9 ){
+        document.write( unidades[numeroInserido])
+    };
+    
+  
+    if (numeroInserido >= 11 && numeroInserido <= 19  ){
+      document.write(exce[segundo])
+    };
+
+    if(numeroInserido >= 21 && numeroInserido <= 99 ){
+      document.write( Dezenas[primeiro] + " e " + unidades[segundo] )
+    }
+  
+  
+     
+  
+
+
+    
 
     </script>
     
