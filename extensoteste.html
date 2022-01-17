@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extenso</title>
+</head>
+<body>
+
+  <script>
+    
+    //recebe e guarda numero digitado
+    var numero = prompt("Digite aqui seu número entre 1 e 1.000.000");
+
+    //valida numero recebido
+    if (numero <= 0 || numero > 1000000 ) {
+      alert("Número Inválido! Tente novamente com um número entre 1 e 1.000.000 ")
+    };
+
+    //verifca a quantidade  de dígitos
+    var tamanho = numero.length
+  
+    var unidades = [" ", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove"];
+    var Dezenas = [" ", "Dez", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
+    var Centenas = [ " ","Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"];
+    var exce = [" ", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezeseis", "Dezesete", "Dezoito", "Dezenove"];
+     
+    var primeiro = numero.substring(-1,1)
+     var segundo = numero.substring(1,2)
+     var terceiro = numero.substring(2,3)
+     var quarto = numero.substring(3,4)
+     var quinto = numero.substring(4 , 5 )
+     var sexto = numero.substring ( 5, 6)
+     
+   
+   
+    // compoe e devolve  unidade simples (1)
+    function compoeUnidade(){
+     var uni = unidades[primeiro]
+     return uni
+    }
+
+    //compoe parte dezena Com Unidade  (1011)
+   function UnidadeComDezenaMilhar(){
+      var dezeMilhar = Dezenas[terceiro]
+      var dezenaUniMilhar = Dezenas [terceiro] + " e " + unidades[quarto]
+     
+       if (terceiro == 0 ){
+          return dezeMilhar
+      }else {
+          return dezenaUniMilhar
+     }
+     
+    }
+  
+    // compoe parte milhar com centena simples ou composta( 1110)
+    function UnidadeComCentenaMilhar(){
+     var centenaMilhar =  " e " + Centenas[segundo]
+     var centenaUniMilhar = Centenas[segundo] + " e " + unidades[quarto]
+     var centenaDezeMilhar = Centenas[segundo] + " e " + Dezenas[terceiro]
+     var centenaCompostaMilhar = Centenas[segundo] + " e " + Dezenas[terceiro] + " e " + unidades[quarto]
+    
+
+      if (  terceiro == 0 && quarto == 0 ){
+            return centenaMilhar 
+
+       }else if ( terceiro == 0 && quarto!= 0 ){
+           return centenaUniMilhar
+
+       }else if ( terceiro != 0 && quarto == 0 ){
+          return centenaDezeMilhar
+       }else  { 
+           return centenaCompostaMilhar
+        }
+
+    }
+  
+  
+    //Devolve Unidade Milhar simples, com Dezena, com Centena 
+    function MilharUnidade(){
+     
+     var milharUnidadeCentena = compoeUnidade () + " Mil "  + UnidadeComCentenaMilhar();
+     var milharUnidadeDezena = compoeUnidade () + " Mil " + UnidadeComDezenaMilhar();
+     var milhaUnidadeSimples = compoeUnidade( ) + " Mil "  + " e " + compoeUnidadeMilhar();
+ 
+     if (segundo != 0){
+       return  milharUnidadeCentena
+     }else if ( segundo != 0 && terceiro != 0 ){
+       return milharUnidadeDezena
+     }else {
+      return milhaUnidadeSimples
+     }
+ }
+
+   
+ 
+
+    
+   function compoeExce(){
+     var ex = exce[segundo]
+     return ex
+   }
+    
+   function MilharExce() {
+      var milharExce = compoeExce () + " Mil ";
+      return milharExce                                  
+      
+    }
+  
+   
+   
+   function compoeDezena(){
+      var deze = Dezenas[primeiro]
+      var dezenaUni = Dezenas [primeiro] + " e " + unidades[segundo]
+     
+       if (segundo == 0 ){
+          return deze
+      }else {
+          return dezenaUni
+     }
+     
+    }
+     
+    // dezena parte milhar
+    function compoeMilharDezena (){
+      var dezenaMilhar = Dezenas[primeiro]  + " Mil ";
+      var dezenaMilharUnidade = Dezenas[primeiro] + " e " + unidades[segundo] + " Mil ";
+      if ( segundo != 0){
+       return  dezenaMilharUnidade
+      }else{
+        return dezenaMilhar
+      }
+    }
+
+    //dezena parte centena
+    function compoeMilharDezenaUnidade() {
+      var dezenaMilharUnidade = " e " + unidade[quinto] + " Mil ";
+      var dezenaMilharDezenaSimples = Dezena[quarto]
+
+      if ( quinto != 0 ){
+        return
+        dezenaMilharUnidade
+      }else if (quarto != 0 && quinto == 0 ){
+        return
+        dezenaMilharDezenaSimples
+      }
+      
+      
+    }
+
+    //compoe centena se tamanho =3
+    function compoeCentena(){
+     var centena = Centenas[primeiro]
+     var centenaUni = Centenas[primeiro] + " e " + unidades[terceiro]
+     var centenaDeze = Centenas[primeiro] + " e " + Dezenas[segundo]
+     var centenaComposta = Centenas[primeiro] + " e " + Dezenas[segundo] + " e " + unidades[terceiro]
+    //criar var para Cem
+
+      if (  segundo == 0 && terceiro == 0 ){
+            return centena 
+
+       }else if ( segundo == 0 && terceiro != 0 ){
+           return centenaUni
+
+       }else if ( segundo != 0 && terceiro == 0 ){
+          return centenaDeze
+       }else  { 
+           return centenaComposta
+        }
+
+    }
+     // compoe centena na primeira parte  se tamanho = 6
+    function compoeCentenaMilhar(){
+     var milharCentena = Centenas[primeiro] + " Mil "
+     var milharCentenaUni = Centenas[primeiro]  + " e " + unidades[terceiro] + " Mil "
+     var milharCentenaDeze = Centenas[primeiro] + " e " + Dezenas[segundo] + " Mil "
+     var milharCentenaComposta = Centenas[primeiro] +  " e " + Dezenas[segundo] + " e " + unidades[terceiro] + " Mil "
+    //criar var para Cem
+
+      if (  segundo == 0 && terceiro == 0 ){
+            return milharCentena 
+
+       }else if ( segundo == 0 && terceiro != 0 ){
+           return milharCentenaUni
+
+       }else if ( segundo != 0 && terceiro == 0 ){
+          return milharCentenaDeze
+       }else  { 
+           return milharCentenaComposta
+        }
+
+    }
+
+    // compoe centena na segunda parte se tamanho = 6
+    function MilharCentenaComCentena(){
+      var centenaMilharSeg = " e " + Centenas[quarto] //centena redonda na segunda parte
+      var centenaMilharUnidadeSeg= Centenas[quarto] +  " e " + unidades[sexto]// centena com unidade na parte
+      var centenaMilharDezeSeg= Centenas[quarto] + " e " + Dezenas[quinto] // centena com dezena simples
+      var centenaMilharCompostaSeg = Centenas[quarto] + " e " + Dezenas[quinto] + " e " + unidades[sexto]
+
+      if (  quinto == 0 && sexto == 0 ){
+            return centenaMilharSeg
+
+       }else if ( quinto == 0 && sexto != 0 ){
+           return centenaMilharUnidadeSeg
+
+       }else if ( quinto != 0 && sexto == 0 ){
+          return centenaMilharDezeSeg
+       }else  { 
+           return centenaMilharCompostaSeg
+        }
+    }
+
+     
+
+    function compoeMilharCentena(){
+      var centenaMilhar = " e " + Centenas[terceiro] //centena redonda na segunda parte
+      var centenaMilharUnidade = Centenas[terceiro] +  " e " + unidades[quinto]// centena com unidade na parte
+      var centenaMilharDeze = Centenas[terceiro] + " e " + Dezenas[quarto] // centena com dezena simples
+      var centenaMilharComposta = Centenas[terceiro] + " e " + Dezenas[quarto] + " e " + unidades[quinto]
+
+      if (  quarto == 0 && quinto == 0 ){
+            return centenaMilhar 
+
+       }else if ( quarto == 0 && quinto != 0 ){
+           return centenaMilharUnidade
+
+       }else if ( quarto != 0 && quinto == 0 ){
+          return centenaMilharDeze
+       }else  { 
+           return centenaMilharComposta
+        }
+    }
+
+
+
+
+
+
+    if (numero <= 9 ){
+     
+     document.write( compoeUnidade());
+ 
+    }else if(numero >= 11 && numero <= 19){
+     
+     document.write( compoeExce());
+ 
+    }else if ( numero < 99 ){
+ 
+      document.write( compoeDezena());
+ 
+    }else if (numero > 99 && numero < 999) {
+      document.write(compoeCentena());
+
+    }else if  (numero > 999 ){
+      
+     document.write (compoeCentenaMilhar() + MilharCentenaComCentena())
+
+
+    }
+    
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extenso 3</title>
+</head>
+<body>
+    <script>
+   
+       for (let numeroInt = 1; numeroInt <= 10001; numeroInt+=1) {
+
+        var numero = numeroInt.toString();
+        document.write(`<br />${numero}`);
+    
+    //recebe e guarda numero digitado
+//    var numero = prompt("Digite aqui seu número entre 1 e 1.000.000");
+
+    //valida numero recebido
+    if (numero <= 0 || numero > 1000000 ) {
+      alert("Número Inválido! Tente novamente com um número entre 1 e 1.000.000 ")
+    };
+
+    
+   
+    
+    
+    var unidades = [" ", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove"];
+    var Dezenas = [" ", " ", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"];
+    var Centenas = [ " ","Cento", "Duzentos", "Trezentos", "Quatrocentos", "Quinhentos", "Seiscentos", "Setecentos", "Oitocentos", "Novecentos"];
+    var exce = [" Dez ", "Onze", "Doze", "Treze", "Quatorze", "Quinze", "Dezeseis", "Dezesete", "Dezoito", "Dezenove"];
+ 
+    
+    // separa numeros
+    var primeiro = numero.substring(-1,1)
+     var segundo = numero.substring(1,2)
+     var terceiro = numero.substring(2,3)
+     var quarto = numero.substring(3,4)
+     var quinto = numero.substring(4,5)
+     var sexto = numero.substring(5,6)
+
+     if ( numero == 10000){
+       document.write(" Dez Mil")
+   } 
+    
+     
+     
+
+     var tamanho = numero.length
+   
+     // compoe   unidade simples (1)
+    function compoeUnidade(){
+     var uni = unidades[primeiro]
+     return uni
+    }
+
+
+     // compoe exceção (2)
+   function compoeExce(){
+     var ex = exce[segundo]
+     return ex
+   }
+
+
+    //compoe dezena (2) 
+   function compoeDezena(){
+      var deze = Dezenas[primeiro]
+      var dezenaUni = Dezenas [primeiro] + " e " + unidades[segundo]
+     
+       if (segundo == 0 ){
+          return deze
+      }else {
+          return dezenaUni
+     }
+     
+    }
+
+     //compoe centena (3)
+     function compoeCentena(){
+          var centena = Centenas[primeiro]
+          var centenaUni = Centenas[primeiro] + " e " + unidades[terceiro]
+          var centenaDeze = Centenas[primeiro] + " e " + Dezenas[segundo]
+          var centenaComposta = Centenas[primeiro] + " e " + Dezenas[segundo] + " e " + unidades[terceiro]
+          var centenaComExce = Centenas[primeiro] + " e " + exce[terceiro]
+          //criar var para Cem
+
+          if (  segundo == 0 && terceiro == 0 ){
+                return centena 
+
+              }else if ( segundo == 0 && terceiro != 0 ){
+                 return centenaUni
+
+              }else if ( segundo != 0 && terceiro == 0 ){
+                return centenaDeze
+
+              }else if (segundo == 1 && terceiro > 0)  { 
+                  return centenaComExce
+          } else {
+              return centenaComposta
+          }
+
+      }
+
+      // separa e compoe parte milhar
+
+      function parteMilhar(){
+        var milharUni = numero / 1000
+        var milharExce = numero / 1000
+        var milharDeze = numero / 1000
+        var milharCent = numero / 1000
+        
+    
+         
+        if (tamanho == 4 ) {
+            return milharUni
+        }else if (tamanho == 5){
+            return milharDeze
+        }else if (tamanho == 5  ){
+            return milharExce
+        }else if (tamanho == 6 ){
+            return milharCent
+        }
+     
+     }
+ 
+     
+     function compoeParteMilhar(){
+         if (parteMilhar() <=  9 ){
+             return compoeUnidade() + " Mil " 
+         }else if ( parteMilhar( ) >= 10 && parteMilhar () < 20 ){
+             return compoeExce() + " Mil "
+         }else if ( parteMilhar() >= 20 && parteMilhar( ) < 99 ){
+             return compoeDezena() + " Mil "
+         }else if ( parteMilhar( ) > 99 ){
+             return compoeCentena() + " Mil "
+         } 
+     }
+      
+      //   compoe e devolve parte centena com Unidade Milhar (tamanho (4))
+
+    function compoeUnidadeMilharUnidade(){
+     var uniMilhar = unidades[quarto]
+     return uniMilhar
+    }
+
+    function compoeExceMilharUnidade(){
+     var exMilhar = exce[quarto]
+     return exMilhar
+   }
+
+
+    function compoeDezenaMilharUnidade(){
+      var dezeMilhar = Dezenas[terceiro]
+      var dezenaUniMilhar = Dezenas [terceiro] + " e " + unidades[quarto]
+     
+       if (terceiro == 0 ){
+          return dezeMilhar
+      }else {
+          return dezenaUniMilhar
+     }
+     
+    }
+
+    
+
+    function compoeCentenaMilharUnidade(){
+          var centenaMilhar =  " e " + Centenas[segundo]
+          var centenaUniMilhar = Centenas[segundo] + " e " + unidades[quarto]
+          var centenaDezeMilhar = Centenas[segundo] + " e " + Dezenas[terceiro]
+          var centenaCompostaMilhar = Centenas[segundo] + " e " + Dezenas[terceiro] + " e " + unidades[quarto]
+          var centenaComExceMilhar = Centenas[segundo] + " e " + exce[terceiro]
+          //criar var para Cem
+
+          if (  terceiro == 0 && quarto == 0 ){
+                return centenaMilhar
+
+              }else if ( terceiro == 0 && quarto != 0 ){
+                 return centenaUniMilhar
+
+              }else if ( terceiro != 0 && quarto == 0 ){
+                return centenaDezeMilhar
+
+              }else if (terceiro == 1 && quarto > 0)  { 
+                  return centenaComExceMilhar
+          } else {
+              return centenaCompostaMilhar
+          }
+
+      }
+ 
+      function compoeParteCentenaMilharUnidade() {
+        if (tamanho == 4 ){
+          if (segundo != 0 ){
+              return compoeCentenaMilharUnidade()
+          }else if (segundo == 0 && terceiro != 0 ){
+              return compoeDezenaMilharUnidade()
+          }else if ( terceiro == 1 && quarto != 0 ){
+              return compoeExceMilharUnidade()
+          }else {
+                return compoeUnidadeMilharUnidade()
+          }
+        }
+      }
+    
+    // compoe e devolve parte centena com  dezena parte milhar ( tamanho (5))
+
+    function compoeUnidadeMilharDezena(){
+     var uniMilharDeze = unidades[quinto]
+     return uniMilharDeze
+    }
+
+    function compoeExceMilharDezena(){
+     var exMilharDeze = exce[quinto]
+     return exMilharDeze
+   }
+  
+   function compoeDezenaMilharDezena(){
+      var dezenaMilharDeze = Dezenas[quarto]
+      var dezenaUniMilharDeze = Dezenas [quarto] + " e " + unidades[quinto]
+     
+       if (quarto == 0 ){
+          return dezenaMilharDeze
+      }else if (quarto != 0 && quinto != 0) {
+          return dezenaUniMilharDeze
+     }
+     
+    }
+
+    function compoeCentenaMilharDezena(){
+          var centenaMilharDeze =  " e " + Centenas[terceiro]
+          var centenaUniMilharDeze = Centenas[terceiro] + " e " + unidades[quinto]
+          var centenaDezeMilharDeze = Centenas[terceiro] + " e " + Dezenas[quarto]
+          var centenaCompostaMilharDeze = Centenas[terceiro] + " e " + Dezenas[quarto] + " e " + unidades[quinto]
+          var centenaComExceMilharDeze = Centenas[terceiro] + " e " + exce[quinto]
+          //criar var para Cem
+
+          if (  quarto == 0 && quinto == 0 ){
+                return centenaMilharDeze
+
+              }else if ( quarto == 0 && quinto != 0 ){
+                 return centenaUniMilharDeze
+
+              }else if ( quarto != 0 && quinto == 0 ){
+                return centenaDezeMilharDeze
+
+              }else if (quarto == 1 && quinto > 0)  { 
+                  return centenaComExceMilharDeze
+          } else {
+              return centenaCompostaMilharDeze
+          }
+
+      }
+
+      function compoeParteCentenaMilharDezena() {
+        if (tamanho == 5 ){
+          if (terceiro != 0 ){
+              return compoeCentenaMilharDezena()
+          }else if (terceiro == 0 && quarto != 0 ){
+              return compoeDezenaMilharDezena()
+          }else if ( quarto == 1 && quinto != 0 ){
+              return compoeExceMilharDeze()
+          }else {
+                return compoeUnidadeMilharDezena()
+          }
+        }
+      }
+
+
+
+    // compoe e devolve parte centena com  centena parte milhar ( tamanho (6))
+
+    function compoeUnidadeMilharCentena(){
+     var uniMilharCent = unidades[sexto]
+     return uniMilharCent
+    }
+
+    function compoeExceMilharCentena(){
+     var exMilhaCent = exce[sexto]
+     return exMilharCent
+   }
+    
+   
+   function compoeDezenaMilharCent(){
+      var dezenaMilharCent = Dezenas[quinto]
+      var dezenaUniMilharCent = Dezenas [quinto] + " e " + unidades[sexto]
+     
+       if (quinto != 0 ){
+          return dezenaMilharCent
+      }else if (quinto != 0 && sexto != 0) {
+          return dezenaUniMilharCent
+     }
+     
+    }
+
+    function compoeCentenaMilharCentena(){
+          var centenaMilharCent =   Centenas[quarto]
+          var centenaUniMilharCent = Centenas[quarto] + " e " + unidades[sexto]
+          var centenaDezeMilharCent = Centenas[quarto] + " e " + Dezenas[quinto]
+          var centenaCompostaMilharCent = Centenas[quarto] + " e " + Dezenas[quinto] + " e " + unidades[sexto]
+          var centenaComExceMilharCent = Centenas[quarto] + " e " + exce[sexto]
+          //criar var para Cem
+ 
+          if (  quinto == 0 && sexto == 0 ){
+                return centenaMilharCent
+
+              }else if ( quinto == 0 && sexto != 0 ){
+                 return centenaUniMilharCent
+
+              }else if ( quinto != 0 && sexto == 0 ){
+                return centenaDezeMilharCent
+
+              }else if (quinto == 1 && sexto > 0)  { 
+                  return centenaComExceMilharCent
+          } else if (quarto != 0 && quinto != 0 &&  sexto != 0 ) {
+              return centenaCompostaMilharCent
+          }
+
+      }
+
+      
+      function compoeParteCentenaMilharCentena() {
+        if (tamanho == 6 ){
+          if (quarto != 0 ){
+              return compoeCentenaMilharCent()
+          }else if (quarto == 0 && quinto != 0 ){
+              return compoeDezenaMilharCent()
+          }else if ( quinto == 1 && sexto != 0 ){
+              return compoeExceMilharCent()
+          }else {
+                return compoeUnidadeMilharCent()
+          }
+        }
+      }
+
+ 
+  
+   
+   
+
+
+  // Aqui começam as devoluções na tela
+
+   if ( numero <= 9  ){
+      document.write( compoeUnidade() )
+   }
+    
+   if (numero > 9 && numero < 20 ){
+       document.write( compoeExce())
+   }
+
+   if (numero <= 99 && numero >= 20  ){
+       document.write ( compoeDezena())
+   }
+
+   if (numero > 99 && numero < 1000 ){
+       document.write( compoeCentena())
+
+   }
+  
+   if (tamanho == 4 ){
+       document.write(compoeParteMilhar() + compoeParteCentenaMilharUnidade( ))
+   }
+
+   if (tamanho == 5 ){
+       document.write ( compoeParteMilhar() + compoeParteCentenaMilharDezena())
+   }
+   
+   if ( tamanho == 6 ){
+       document.write(compoeParteMilhar() + compoeCentenaMilharCentena()) 
+   }
+  
+   if ( numero == 1000000){
+       document.write( " Um milhão ")
+   }
+
+   
+
+  if ( numero == 100 ) {
+      documnet.write( "Cem" )
+  }
+
+  if ( numero == 10 ){
+       document.write(" Dez ")
+  }
+
+
+}
+    </script>
+    
+ </body>
+</html>
